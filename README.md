@@ -22,3 +22,6 @@ Aplikasi ini merupakan simulasi sistem staking dan liquidity pools berbasis Wind
   - APR ditampilkan sebagai informasi tiap baris pool
 
 Tampilan
+![Image](https://github.com/user-attachments/assets/4473b359-24c8-4db7-85ff-51453b6ff379)
+![Image](https://github.com/user-attachments/assets/e49b2918-8bad-4336-86da-5d54fe5927fe)
+![Image](https://github.com/user-attachments/assets/36720c32-6b00-40b0-b791-7d5dae0f4d4c)
