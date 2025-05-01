@@ -42,11 +42,11 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLiquidity)).BeginInit();
             this.panel1.SuspendLayout();
@@ -65,7 +65,6 @@
             this.btnDelete.Text = "Withdraw";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-
             // 
             // btnAdd
             // 
@@ -82,7 +81,7 @@
             // 
             // cmbCoinName
             // 
-            this.cmbCoinName.BackColor = System.Drawing.Color.SkyBlue;
+            this.cmbCoinName.BackColor = System.Drawing.Color.Azure;
             this.cmbCoinName.FormattingEnabled = true;
             this.cmbCoinName.Location = new System.Drawing.Point(374, 78);
             this.cmbCoinName.Name = "cmbCoinName";
@@ -91,7 +90,7 @@
             // 
             // txtAmount
             // 
-            this.txtAmount.BackColor = System.Drawing.Color.SkyBlue;
+            this.txtAmount.BackColor = System.Drawing.Color.Azure;
             this.txtAmount.Location = new System.Drawing.Point(374, 125);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(121, 22);
@@ -188,16 +187,38 @@
             this.panel1.Size = new System.Drawing.Size(690, 47);
             this.panel1.TabIndex = 8;
             // 
-            // label3
+            // label7
             // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(12, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 16);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "BUSTER";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Cascadia Code", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label7.Location = new System.Drawing.Point(573, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(99, 16);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Connect";
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Cascadia Code", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label6.Location = new System.Drawing.Point(373, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(99, 16);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Liquidity";
+            // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Cascadia Code", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label5.Location = new System.Drawing.Point(299, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(99, 16);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Stake";
             // 
             // label4
             // 
@@ -211,38 +232,16 @@
             this.label4.Text = "Dashboard";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // label5
+            // label3
             // 
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Cascadia Code", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label5.Location = new System.Drawing.Point(299, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(99, 16);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Stake";
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Cascadia Code", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label6.Location = new System.Drawing.Point(373, 16);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(99, 16);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Liquidity";
-            // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Cascadia Code", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label7.Location = new System.Drawing.Point(573, 16);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(99, 16);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Connect";
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label3.Location = new System.Drawing.Point(12, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 16);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "BUSTER";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // btnEdit
             // 
