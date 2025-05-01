@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DC2A9DFE-4363-4605-B0BB-F16C9DB3386F}</ProjectGuid>
+    <ProjectGuid>{7D492A50-CF2B-41C8-AF41-5CE45245C1A0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>StakingForm</RootNamespace>
-    <AssemblyName>StakingForm</AssemblyName>
+    <RootNamespace>Liquidity_Pool</RootNamespace>
+    <AssemblyName>Liquidity_Pool</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -65,7 +65,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -79,12 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Screenshot 2025-01-04 105614.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\download %283%29.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

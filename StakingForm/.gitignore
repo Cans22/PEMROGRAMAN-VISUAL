@@ -1,0 +1,29 @@
+# Ignore Visual Studio temp files, build results, and
+# user-specific files
+
+.vs/
+*.user
+*.suo
+*.cache
+*.dbmdl
+*.pdb
+*.log
+*.tlog
+*.ipch
+*.obj
+*.aps
+*.ncb
+*.pyc
+*.ilk
+*.exp
+*.dll
+*.exe
+*.bin
+*.class
+*.vshost.*
+_ReSharper*/
+build/
+[Bb]in/
+[Oo]bj/
+TestResults/
+*.DS_Store
