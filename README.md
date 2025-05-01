@@ -6,20 +6,25 @@ Aplikasi ini merupakan simulasi sistem staking dan liquidity pools berbasis Wind
 
 #  Fitur Utama
 
--  *Dashboard Header UI*
+-  **Dashboard Header UI**
   - Tampilan utama dengan header navigasi (tanpa sidebar)
   - Navigasi ke halaman Dashboard, Pools,Stake , dan Connect Wallet
 
--  *Connect Wallet*
+-  **Connect Wallet**
   - Simulasi tombol untuk menghubungkan wallet (placeholder, belum real blockchain)
 
--  *Liquidity Pools*
+-  **Liquidity Pools**
   - Tabel DataGridView berisi info pool (token pair, APR, liquidity)
   - Input jumlah (amount) dan tombol Stake / Withdraw
 
--  *APR (Annual Percentage Rate)*
+-  **APR (Annual Percentage Rate)**
   - Menampilkan tingkat pengembalian tahunan dari staking
   - APR ditampilkan sebagai informasi tiap baris pool
+
+- **Stake & Withdraw**
+  - Masukkan jumlah token pada kolom input
+  - Klik tombol Stake untuk mengunci token
+  - Klik Withdraw untuk mengambil kembali token
 
 Tampilan
 ![Image](https://github.com/user-attachments/assets/4473b359-24c8-4db7-85ff-51453b6ff379)
