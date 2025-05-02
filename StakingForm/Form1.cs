@@ -7,36 +7,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace StakingForm
 {
     public partial class Form1 : Form
     {
-        List<Liquidity> liquidityList = new List<Liquidity>();
+        string connStr = "server=localhost;user=root;password=;database=staking_db;";
         int selectedId = -1;
-        int nextId = 1;
 
         public Form1()
         {
             InitializeComponent();
 
-            // Tambah pilihan koin ke ComboBox
             cmbCoinName.Items.AddRange(new string[] { "BTC", "ETH", "SOL" });
             cmbCoinName.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbCoinName.SelectedIndex = 0;
 
-            RefreshGrid();
+            LoadData();
         }
 
-        void RefreshGrid()
+        private void LoadData()
         {
-            dgvLiquidity.DataSource = null;
-            dgvLiquidity.DataSource = liquidityList.Select(l => new
+            using (var conn = new MySqlConnection(connStr))
             {
-                l.Id,
-                l.CoinName,
-                l.Amount
-            }).ToList();
+                conn.Open();
+                var cmd = new MySqlCommand("SELECT id, coin_name AS 'Coin', amount AS 'Amount' FROM liquidity", conn);
+                var adapter = new MySqlDataAdapter(cmd);
+                var table = new DataTable();
+                adapter.Fill(table);
+                dgvLiquidity.DataSource = table;
+                dgvLiquidity.DataSource = table;
+                if (dgvLiquidity.Columns.Contains("id"))
+                {
+                    dgvLiquidity.Columns["id"].Visible = false;
+                }
+
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -45,72 +52,104 @@ namespace StakingForm
 
             if (!decimal.TryParse(txtAmount.Text, out decimal amount))
             {
-                MessageBox.Show("Amount harus berupa angka.");
+                MessageBox.Show("Fill Number", "Wrong Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            liquidityList.Add(new Liquidity
+            using (var conn = new MySqlConnection(connStr))
             {
-                Id = nextId++,
-                CoinName = coin,
-                Amount = amount
-            });
+                conn.Open();
+                var cmd = new MySqlCommand("INSERT INTO liquidity (coin_name, amount) VALUES (@coin, @amount)", conn);
+                cmd.Parameters.AddWithValue("@coin", coin);
+                cmd.Parameters.AddWithValue("@amount", amount);
+                cmd.ExecuteNonQuery();
+            }
 
-            RefreshGrid();
+            LoadData();
             txtAmount.Clear();
             cmbCoinName.SelectedIndex = 0;
-        }
 
+            MessageBox.Show("Staking Added Succesfully.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
         private void dgvLiquidity_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                selectedId = (int)dgvLiquidity.Rows[e.RowIndex].Cells["Id"].Value;
-                var selected = liquidityList.FirstOrDefault(l => l.Id == selectedId);
-                if (selected != null)
-                {
-                    cmbCoinName.SelectedItem = selected.CoinName;
-                    txtAmount.Text = selected.Amount.ToString();
-                }
+                selectedId = Convert.ToInt32(dgvLiquidity.Rows[e.RowIndex].Cells["id"].Value);
+                cmbCoinName.SelectedItem = dgvLiquidity.Rows[e.RowIndex].Cells["Coin"].Value.ToString();
+                txtAmount.Text = dgvLiquidity.Rows[e.RowIndex].Cells["Amount"].Value.ToString();
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            var liquidity = liquidityList.FirstOrDefault(l => l.Id == selectedId);
-            if (liquidity != null && decimal.TryParse(txtAmount.Text, out decimal amount))
+            if (selectedId == -1)
             {
-                liquidity.CoinName = cmbCoinName.SelectedItem.ToString();
-                liquidity.Amount = amount;
-                RefreshGrid();
+                MessageBox.Show("Select data before edit.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
+
+            if (!decimal.TryParse(txtAmount.Text, out decimal amount))
+            {
+                MessageBox.Show("Fill Number", "Wrong Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (var conn = new MySqlConnection(connStr))
+            {
+                conn.Open();
+                var cmd = new MySqlCommand("UPDATE liquidity SET coin_name = @coin, amount = @amount WHERE id = @id", conn);
+                cmd.Parameters.AddWithValue("@coin", cmbCoinName.SelectedItem.ToString());
+                cmd.Parameters.AddWithValue("@amount", amount);
+                cmd.Parameters.AddWithValue("@id", selectedId);
+                cmd.ExecuteNonQuery();
+            }
+
+            LoadData();
+            txtAmount.Clear();
+            cmbCoinName.SelectedIndex = 0;
+            selectedId = -1;
+
+            MessageBox.Show("Staking Update Succesfully", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            var liquidity = liquidityList.FirstOrDefault(l => l.Id == selectedId);
-            if (liquidity != null)
+            if (selectedId == -1)
             {
-                liquidityList.Remove(liquidity);
-                RefreshGrid();
-                txtAmount.Clear();
-                cmbCoinName.SelectedIndex = 0;
-                selectedId = -1;
+                MessageBox.Show("Select Data Before Edit.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
+
+            var confirm = MessageBox.Show("Withdraw?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm != DialogResult.Yes) return;
+
+            using (var conn = new MySqlConnection(connStr))
+            {
+                conn.Open();
+                var cmd = new MySqlCommand("DELETE FROM liquidity WHERE id = @id", conn);
+                cmd.Parameters.AddWithValue("@id", selectedId);
+                cmd.ExecuteNonQuery();
+            }
+
+            LoadData();
+            txtAmount.Clear();
+            cmbCoinName.SelectedIndex = 0;
+            selectedId = -1;
+
+            MessageBox.Show("Withdraw Succesfully.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void txtAmount_TextChanged(object sender, EventArgs e)
         {
-            // Kamu bisa isi validasi angka di sini, atau biarkan kosong
-            // Contoh validasi:
             if (!decimal.TryParse(txtAmount.Text, out _) && !string.IsNullOrWhiteSpace(txtAmount.Text))
             {
-                txtAmount.BackColor = Color.MistyRose; // error input
+                txtAmount.BackColor = Color.MistyRose;
             }
             else
             {
-                txtAmount.BackColor = Color.SkyBlue; // valid
+                txtAmount.BackColor = Color.SkyBlue;
             }
         }
 
