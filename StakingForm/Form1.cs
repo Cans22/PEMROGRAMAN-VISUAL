@@ -17,33 +17,23 @@ namespace StakingForm
             cmbCoinName.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbCoinName.SelectedIndex = 0;
 
-            LoadData();
-        }
-
-        private void LoadData()
-        {
-            dgvLiquidity.DataSource = LiquidityService.GetAllLiquidity();
-            if (dgvLiquidity.Columns.Contains("id"))
-                dgvLiquidity.Columns["id"].Visible = false;
+            LiquidityController.LoadLiquidity(dgvLiquidity);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string coin = cmbCoinName.SelectedItem.ToString();
-
-            if (!decimal.TryParse(txtAmount.Text, out decimal amount))
+            try
             {
-                MessageBox.Show("Fill Number", "Wrong Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                LiquidityController.AddLiquidity(cmbCoinName.SelectedItem.ToString(), txtAmount.Text);
+                LiquidityController.LoadLiquidity(dgvLiquidity);
+                txtAmount.Clear();
+                cmbCoinName.SelectedIndex = 0;
+                MessageBox.Show("Staking Added Successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            LiquidityService.AddLiquidity(coin, amount);
-
-            LoadData();
-            txtAmount.Clear();
-            cmbCoinName.SelectedIndex = 0;
-
-            MessageBox.Show("Staking Added Successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void dgvLiquidity_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -64,23 +54,22 @@ namespace StakingForm
                 return;
             }
 
-            if (!decimal.TryParse(txtAmount.Text, out decimal amount))
-            {
-                MessageBox.Show("Fill Number", "Wrong Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             var confirm = MessageBox.Show("Edit?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirm != DialogResult.Yes) return;
 
-            LiquidityService.UpdateLiquidity(selectedId, cmbCoinName.SelectedItem.ToString(), amount);
-
-            LoadData();
-            txtAmount.Clear();
-            cmbCoinName.SelectedIndex = 0;
-            selectedId = -1;
-
-            MessageBox.Show("Staking Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                LiquidityController.UpdateLiquidity(selectedId, cmbCoinName.SelectedItem.ToString(), txtAmount.Text);
+                LiquidityController.LoadLiquidity(dgvLiquidity);
+                txtAmount.Clear();
+                cmbCoinName.SelectedIndex = 0;
+                selectedId = -1;
+                MessageBox.Show("Staking Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -94,14 +83,19 @@ namespace StakingForm
             var confirm = MessageBox.Show("Withdraw?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirm != DialogResult.Yes) return;
 
-            LiquidityService.DeleteLiquidity(selectedId);
-
-            LoadData();
-            txtAmount.Clear();
-            cmbCoinName.SelectedIndex = 0;
-            selectedId = -1;
-
-            MessageBox.Show("Withdraw Successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                LiquidityController.DeleteLiquidity(selectedId);
+                LiquidityController.LoadLiquidity(dgvLiquidity);
+                txtAmount.Clear();
+                cmbCoinName.SelectedIndex = 0;
+                selectedId = -1;
+                MessageBox.Show("Withdraw Successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void txtAmount_TextChanged(object sender, EventArgs e)
@@ -111,12 +105,10 @@ namespace StakingForm
             else
                 txtAmount.BackColor = Color.SkyBlue;
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoadData();
+            LiquidityController.LoadLiquidity(dgvLiquidity);
         }
     }
 }
-
-
-    
