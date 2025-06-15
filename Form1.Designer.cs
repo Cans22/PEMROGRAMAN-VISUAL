@@ -17,7 +17,7 @@
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.cmbCoinName = new System.Windows.Forms.ComboBox();
@@ -26,12 +26,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dgvLiquidity = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnConnectWallet = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.btnConnectWallet = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLiquidity)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -77,7 +77,6 @@
             this.cmbCoinName.Name = "cmbCoinName";
             this.cmbCoinName.Size = new System.Drawing.Size(121, 24);
             this.cmbCoinName.TabIndex = 3;
-            this.cmbCoinName.SelectedIndexChanged += new System.EventHandler(this.cmbCoinName_SelectedIndexChanged);
             // 
             // txtAmount
             // 
@@ -112,8 +111,8 @@
             // 
             // dgvLiquidity
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvLiquidity.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            this.dgvLiquidity.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvLiquidity.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvLiquidity.BackgroundColor = System.Drawing.Color.White;
             this.dgvLiquidity.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -138,20 +137,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(690, 47);
             this.panel1.TabIndex = 8;
-            // 
-            // btnConnectWallet
-            // 
-            this.btnConnectWallet.BackColor = System.Drawing.Color.Transparent;
-            this.btnConnectWallet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConnectWallet.Font = new System.Drawing.Font("Cascadia Code", 7.8F, System.Drawing.FontStyle.Bold);
-            this.btnConnectWallet.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnConnectWallet.Location = new System.Drawing.Point(497, 8);
-            this.btnConnectWallet.Name = "btnConnectWallet";
-            this.btnConnectWallet.Size = new System.Drawing.Size(92, 32);
-            this.btnConnectWallet.TabIndex = 10;
-            this.btnConnectWallet.Text = "Connect";
-            this.btnConnectWallet.UseVisualStyleBackColor = false;
-            this.btnConnectWallet.Click += new System.EventHandler(this.btnConnectWallet_Click);
             // 
             // label6
             // 
@@ -207,6 +192,20 @@
             this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // btnConnectWallet
+            // 
+            this.btnConnectWallet.BackColor = System.Drawing.Color.Transparent;
+            this.btnConnectWallet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConnectWallet.Font = new System.Drawing.Font("Cascadia Code", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btnConnectWallet.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnConnectWallet.Location = new System.Drawing.Point(597, 8);
+            this.btnConnectWallet.Name = "btnConnectWallet";
+            this.btnConnectWallet.Size = new System.Drawing.Size(90, 32);
+            this.btnConnectWallet.TabIndex = 10;
+            this.btnConnectWallet.Text = "Connect";
+            this.btnConnectWallet.UseVisualStyleBackColor = false;
+            this.btnConnectWallet.Click += new System.EventHandler(this.btnConnectWallet_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -250,6 +249,5 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnConnectWallet;
-
-        }
     }
+}

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
-
 
 namespace StakingForm
 {
@@ -14,10 +12,6 @@ namespace StakingForm
         public Form1()
         {
             InitializeComponent();
-
-
-
-
 
             cmbCoinName.Items.AddRange(new string[] { "BTC", "ETH", "SOL" });
             cmbCoinName.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -121,8 +115,10 @@ namespace StakingForm
         {
             try
             {
-                // URL ke wallet.html 
+                // URL ke wallet.html di folder XAMPP htdocs
                 string walletUrl = "http://localhost/wallet.html";
+
+                // Buka URL dengan browser default
                 System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
                 {
                     FileName = walletUrl,
@@ -135,20 +131,5 @@ namespace StakingForm
             }
         }
 
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-       
-        
-
-
-        private void cmbCoinName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        
     }
 }

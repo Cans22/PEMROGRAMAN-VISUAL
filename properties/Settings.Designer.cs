@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Liquidity_Pool.Properties
+namespace StakingForm.Properties
 {
 
 
