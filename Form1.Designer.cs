@@ -17,7 +17,11 @@
 
         private void InitializeComponent()
         {
+
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+
+           
+
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.cmbCoinName = new System.Windows.Forms.ComboBox();
@@ -33,9 +37,11 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.lblBalance = new System.Windows.Forms.Label();
             this.lblWalletStatus = new System.Windows.Forms.Label();
+
             ((System.ComponentModel.ISupportInitialize)(this.dgvLiquidity)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
+
             // 
             // btnDelete
             // 
@@ -119,6 +125,7 @@
             this.dgvLiquidity.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLiquidity.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvLiquidity.Location = new System.Drawing.Point(136, 292);
+
             this.dgvLiquidity.Name = "dgvLiquidity";
             this.dgvLiquidity.RowHeadersWidth = 51;
             this.dgvLiquidity.RowTemplate.Height = 24;
@@ -138,6 +145,7 @@
             this.panel1.Size = new System.Drawing.Size(690, 47);
             this.panel1.TabIndex = 8;
             // 
+
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Cascadia Code", 7.8F, System.Drawing.FontStyle.Bold);
@@ -161,6 +169,7 @@
             this.btnConnectwallet.Text = "Connect";
             this.btnConnectwallet.UseVisualStyleBackColor = false;
             this.btnConnectwallet.Click += new System.EventHandler(this.btnConnectWallet_Click);
+
             // 
             // label5
             // 
@@ -172,6 +181,7 @@
             this.label5.TabIndex = 2;
             this.label5.Text = "Stake";
             // 
+
             // label3
             // 
             this.label3.AutoSize = true;
@@ -180,7 +190,9 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(130, 16);
             this.label3.TabIndex = 4;
+
             this.label3.Text = "BUSTER TESTNET";
+
             // 
             // btnEdit
             // 
@@ -196,6 +208,7 @@
             this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+
             // lblBalance
             // 
             this.lblBalance.BackColor = System.Drawing.Color.Transparent;
@@ -213,6 +226,7 @@
             this.lblWalletStatus.Name = "lblWalletStatus";
             this.lblWalletStatus.Size = new System.Drawing.Size(175, 32);
             this.lblWalletStatus.TabIndex = 12;
+
             // 
             // Form1
             // 
@@ -254,11 +268,13 @@
         private System.Windows.Forms.DataGridView dgvLiquidity;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
+
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnConnectwallet;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblBalance;
         private System.Windows.Forms.Label lblWalletStatus;
+
     }
 }

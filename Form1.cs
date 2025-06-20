@@ -11,12 +11,14 @@ namespace StakingForm
     public partial class Form1 : Form
     {
         int selectedId = -1;
+
         public class WalletData
         {
             public string Type { get; set; }
             public string Address { get; set; }
             public string Balance { get; set; }
         }
+
 
         public Form1()
         {
@@ -74,6 +76,7 @@ namespace StakingForm
                 cmbCoinName.SelectedIndex = 0;
                 selectedId = -1;
                 MessageBox.Show("Staking Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
             catch (Exception ex)
             {
@@ -159,6 +162,10 @@ namespace StakingForm
         }
 
 
+            var confirm = MessageBox.Show("Withdraw?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm != DialogResult.Yes) return;
+
+
         private void label7_Click(object sender, EventArgs e)
         {
 
@@ -188,4 +195,5 @@ namespace StakingForm
         }
 
     }
+
 
