@@ -2,12 +2,23 @@
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Text.Json;
+using System.Net.Http;
+
 
 namespace StakingForm
 {
     public partial class Form1 : Form
     {
         int selectedId = -1;
+
+        public class WalletData
+        {
+            public string Type { get; set; }
+            public string Address { get; set; }
+            public string Balance { get; set; }
+        }
+
 
         public Form1()
         {
@@ -65,6 +76,7 @@ namespace StakingForm
                 cmbCoinName.SelectedIndex = 0;
                 selectedId = -1;
                 MessageBox.Show("Staking Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
             catch (Exception ex)
             {
@@ -106,9 +118,57 @@ namespace StakingForm
                 txtAmount.BackColor = Color.SkyBlue;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            LiquidityController.LoadLiquidity(dgvLiquidity);
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    // Ambil wallet address dari file PHP
+                    string walletAddress = await client.GetStringAsync("http://localhost/staking-api/wallet.txt");
+                    walletAddress = walletAddress.Trim();
+
+                    if (string.IsNullOrWhiteSpace(walletAddress) || walletAddress.Length < 10)
+                    {
+                        lblWalletStatus.Text = "❌ Wallet not connected";
+                        lblBalance.Text = "-";
+                        lblWalletAddress.Text = "-";
+                        return;
+                    }
+
+                    // Wallet sudah terkoneksi
+                    lblWalletStatus.Text = "Wallet connected";
+                    lblWalletAddress.Text = "Wallet: " + walletAddress;
+
+                    // Ambil saldo
+                    string json = await client.GetStringAsync("http://localhost/staking-api/get_balance.php");
+                    using var doc = JsonDocument.Parse(json);
+                    string hexBalance = doc.RootElement.GetProperty("result").GetString();
+
+                    // Konversi hex ke ETH
+                    decimal wei = Convert.ToInt64(hexBalance, 16);
+                    decimal eth = wei / 1000000000000000000m;
+
+                    lblBalance.Text = "Balance: " + eth.ToString("0.0000") + " ETH";
+                }
+            }
+            catch (Exception ex)
+            {
+                lblWalletStatus.Text = "Gagal load wallet";
+                lblBalance.Text = "-";
+                lblWalletAddress.Text = "-";
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+
+            var confirm = MessageBox.Show("Withdraw?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm != DialogResult.Yes) return;
+
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btnConnectWallet_Click(object sender, EventArgs e)
@@ -131,5 +191,9 @@ namespace StakingForm
             }
         }
 
+        
+        }
+
     }
-}
+
+
