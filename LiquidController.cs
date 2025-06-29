@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
+using System.Net;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace StakingForm
 {
@@ -8,20 +10,19 @@ namespace StakingForm
     {
         public static void LoadLiquidity(DataGridView dgv)
         {
-            try
+            using (var client = new WebClient())
             {
-                var data = LiquidityService.GetAllLiquidity();
-                dgv.DataSource = data;
+                string json = client.DownloadString("http://localhost/staking-api/get_staking.php");
+
+                var table = JsonConvert.DeserializeObject<DataTable>(json);
+                dgv.DataSource = table;
 
                 if (dgv.Columns.Contains("id"))
                 {
                     dgv.Columns["id"].Visible = false;
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Gagal memuat data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
         }
 
         public static void AddLiquidity(string coin, string amountText)
@@ -29,7 +30,13 @@ namespace StakingForm
             if (!decimal.TryParse(amountText, out decimal amount))
                 throw new ArgumentException("Fill Amount");
 
-            LiquidityService.AddLiquidity(coin, amount);
+            using (var client = new WebClient())
+            {
+                var values = new System.Collections.Specialized.NameValueCollection();
+                values["coin"] = coin;
+                values["amount"] = amount.ToString();
+                client.UploadValues("http://localhost/staking-api/save_stake.php", "POST", values);
+            }
         }
 
         public static void UpdateLiquidity(int id, string coin, string amountText)
