@@ -17,7 +17,7 @@
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.cmbCoinName = new System.Windows.Forms.ComboBox();
@@ -33,6 +33,7 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.lblBalance = new System.Windows.Forms.Label();
             this.lblWalletStatus = new System.Windows.Forms.Label();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLiquidity)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -112,17 +113,17 @@
             // 
             // dgvLiquidity
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.dgvLiquidity.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dgvLiquidity.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLiquidity.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvLiquidity.BackgroundColor = System.Drawing.Color.White;
             this.dgvLiquidity.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLiquidity.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dgvLiquidity.Location = new System.Drawing.Point(136, 292);
+            this.dgvLiquidity.Location = new System.Drawing.Point(136, 270);
             this.dgvLiquidity.Name = "dgvLiquidity";
             this.dgvLiquidity.RowHeadersWidth = 51;
             this.dgvLiquidity.RowTemplate.Height = 24;
-            this.dgvLiquidity.Size = new System.Drawing.Size(433, 91);
+            this.dgvLiquidity.Size = new System.Drawing.Size(452, 113);
             this.dgvLiquidity.TabIndex = 7;
             this.dgvLiquidity.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLiquidity_CellClick);
             // 
@@ -199,6 +200,7 @@
             // lblBalance
             // 
             this.lblBalance.BackColor = System.Drawing.Color.Transparent;
+            this.lblBalance.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblBalance.Location = new System.Drawing.Point(374, 161);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(122, 29);
@@ -209,10 +211,24 @@
             this.lblWalletStatus.BackColor = System.Drawing.Color.Transparent;
             this.lblWalletStatus.Font = new System.Drawing.Font("Cascadia Code", 7.8F, System.Drawing.FontStyle.Bold);
             this.lblWalletStatus.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblWalletStatus.Location = new System.Drawing.Point(578, 43);
+            this.lblWalletStatus.Location = new System.Drawing.Point(565, 43);
             this.lblWalletStatus.Name = "lblWalletStatus";
             this.lblWalletStatus.Size = new System.Drawing.Size(175, 32);
             this.lblWalletStatus.TabIndex = 12;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Font = new System.Drawing.Font("Cascadia Code", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btnRefresh.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnRefresh.Location = new System.Drawing.Point(594, 270);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 32);
+            this.btnRefresh.TabIndex = 16;
+            this.btnRefresh.Text = "🔄";
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // Form1
             // 
@@ -221,6 +237,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = global::StakingForm.Properties.Resources.download__3_;
             this.ClientSize = new System.Drawing.Size(736, 417);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.lblWalletStatus);
             this.Controls.Add(this.lblBalance);
             this.Controls.Add(this.btnEdit);
@@ -254,11 +271,13 @@
         private System.Windows.Forms.DataGridView dgvLiquidity;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
+
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnConnectwallet;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblBalance;
         private System.Windows.Forms.Label lblWalletStatus;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

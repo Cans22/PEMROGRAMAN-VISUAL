@@ -27,24 +27,7 @@ namespace StakingForm
             }
         }
 
-        public static void AddLiquidity(string coin, decimal amount)
-        {
-            try
-            {
-                using (var conn = Database.GetConnection())
-                {
-                    conn.Open();
-                    var cmd = new MySqlCommand("INSERT INTO liquidity (coin_name, amount) VALUES (@coin, @amount)", conn);
-                    cmd.Parameters.AddWithValue("@coin", coin);
-                    cmd.Parameters.AddWithValue("@amount", amount);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (MySqlException ex)
-            {
-                throw new ApplicationException("Gagal menambahkan data: " + ex.Message);
-            }
-        }
+        
 
         public static void UpdateLiquidity(int id, string coin, decimal amount)
         {
