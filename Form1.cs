@@ -31,7 +31,7 @@ namespace StakingForm
             {
                 using var client = new HttpClient();
 
-                // Ambil alamat wallet dari database melalui PHP
+                // Ambil alamat wallet dari database
                 string jsonWallet = await client.GetStringAsync("http://localhost/staking-api/get_wallet.php");
                 using var docWallet = JsonDocument.Parse(jsonWallet);
                 string walletAddress = docWallet.RootElement.GetProperty("address").GetString();
@@ -68,7 +68,7 @@ namespace StakingForm
         {
             try
             {
-                // Buka wallet.html lewat browser default
+                
                 string walletUrl = "http://localhost/wallet.html";
                 System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
                 {
@@ -128,23 +128,31 @@ namespace StakingForm
                 return;
             }
 
-            var confirm = MessageBox.Show("Edit?", "Confirmation", MessageBoxButtons.YesNo);
+            string amount = txtAmount.Text;
+            if (string.IsNullOrWhiteSpace(amount))
+            {
+                MessageBox.Show("Fill Amount.");
+                return;
+            }
+
+            var confirm = MessageBox.Show("Edit staking amount on MetaMask?", "Confirm", MessageBoxButtons.YesNo);
             if (confirm != DialogResult.Yes) return;
 
             try
             {
-                LiquidityController.UpdateLiquidity(selectedId, cmbCoinName.SelectedItem.ToString(), txtAmount.Text);
-                LiquidityController.LoadLiquidity(dgvLiquidity);
-                txtAmount.Clear();
-                cmbCoinName.SelectedIndex = 0;
-                selectedId = -1;
-                MessageBox.Show("Staking Updated.");
+                string walletUrl = $"http://localhost/wallet.html?edit_id={selectedId}&amount={amount}";
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = walletUrl,
+                    UseShellExecute = true
+                });
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Update Error");
+                MessageBox.Show("Failed to open browser: " + ex.Message);
             }
         }
+
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -157,20 +165,32 @@ namespace StakingForm
             var confirm = MessageBox.Show("Withdraw?", "Confirmation", MessageBoxButtons.YesNo);
             if (confirm != DialogResult.Yes) return;
 
+            // Ambil data amount dan coin dari baris yang dipilih
+            if (dgvLiquidity.CurrentRow == null)
+            {
+                MessageBox.Show("Select Coin First");
+                return;
+            }
+
+            string coin = dgvLiquidity.CurrentRow.Cells["coin"].Value?.ToString();
+            string amount = dgvLiquidity.CurrentRow.Cells["amount"].Value?.ToString();
+
+
             try
             {
-                LiquidityController.DeleteLiquidity(selectedId);
-                LiquidityController.LoadLiquidity(dgvLiquidity);
-                txtAmount.Clear();
-                cmbCoinName.SelectedIndex = 0;
-                selectedId = -1;
-                MessageBox.Show("Withdraw Successful.");
+                string walletUrl = $"http://localhost/wallet.html?withdraw_id={selectedId}&amount={amount}";
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = walletUrl,
+                    UseShellExecute = true
+                });
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Delete Error");
+                MessageBox.Show("Failed open browser: " + ex.Message);
             }
         }
+
 
         private void txtAmount_TextChanged(object sender, EventArgs e)
         {
